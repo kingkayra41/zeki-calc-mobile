@@ -1,0 +1,29 @@
+name: Build Flet APK
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Flet and Dependencies
+        run: |
+          pip install flet
+          pip install flet-cli
+
+      - name: Build APK
+        run: |
+          # Flet'in bulut tabanlı paketleme komutu
+          flet build apk --project-name "MyCoolCalc" --verbose
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-app-apk
+          path: build/apk/*.apk
