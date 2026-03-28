@@ -18,8 +18,8 @@ jobs:
 
       - name: Build APK
         run: |
-          # Hata buradaydı, komutu standart hale getirdik
-          flet build apk --verbose
+          # --yes komutu sayesinde "Yükleyeyim mi?" sorusuna otomatik "Evet" diyecek
+          flet build apk --verbose --yes
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
